@@ -17,7 +17,7 @@ lambda_build () {
     cp ../utility/target/utility-1.0.0.jar .
     source /etc/profile.d/maven.sh
     mvn package -DskipTests=true
-    echo "$1 build with utility completed"
+    echo "$2 build with utility completed"
     echo "========================================================================"
     cd ..
 }
