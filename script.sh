@@ -11,6 +11,8 @@ cd ..
 utility_build
 
 lambda_build () {
+    echo "repo_name is: $1"
+    echo "lambda_name is: $2"
     cd $1
     cp ../utility/target/utility-1.0.0.jar .
     source /etc/profile.d/maven.sh
@@ -20,12 +22,14 @@ lambda_build () {
     cd ..
 }
 
-for name in `cat lambdalist.txt`
-do 
-   echo "========================================================================="
-   echo " Calling $name"
-   echo "========================================================================="
-   lambda_build $name 
+for line in `cat lambdalist.txt`
+do       
+        repo_name=$(echo "$line" | cut -d':' -f1)
+        lambda_name=$(echo "$line" | cut -d':' -f2)
+        echo "========================================================================="
+        echo " Calling $lambda_name"
+        echo "========================================================================="
+        lambda_build $repo_name $lambda_name
 done
 
 
